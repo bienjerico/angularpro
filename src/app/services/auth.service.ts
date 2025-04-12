@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { wvsdUserRegistration } from '../models/wvsdUserRegistration';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,12 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('sdAuth');
     console.log('Authentication key removed from localStorage');
+  }
+
+  // Function to send registration data to the backend
+  registerUser(data: wvsdUserRegistration): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(this.apiUrl+'/userregistration/modifyuserregistration', data, { headers });
   }
   
 

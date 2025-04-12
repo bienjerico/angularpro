@@ -1,1 +1,141 @@
-<p>registration works!</p>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Registration</h2>
+    <form [formGroup]="FormData" (ngSubmit)="saveRegistration()">
+        <!-- Username -->
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="username" 
+                name="username" 
+                formControlName="urgUsername"
+                placeholder="Enter your Username"
+                >
+
+            @if(FormData.get('urgUsername')?.invalid && FormData.get('urgUsername')?.touched){
+                <div class="text-danger">
+                    @if (FormData.get('urgUsername')?.errors?.['required']) {
+                        <small>Username is required.</small>
+                    }
+                    @if (FormData.get('urgUsername')?.errors?.['pattern']) {
+                        <small>Username must be 1-10 characters long and contain only letters and numbers.</small>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- Name -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                formControlName="urgName" 
+                placeholder="Enter your name">
+        </div>
+
+        <!-- Professional Email -->
+        <div class="mb-3">
+            <label for="professionalEmail" class="form-label">Professional Email</label>
+            <input 
+                type="email" 
+                class="form-control" 
+                id="professionalEmail" 
+                formControlName="urgprofessionalemail" 
+                placeholder="Enter your professional email">
+        </div>
+
+        <!-- Re-type Professional Email -->
+        <div class="mb-3">
+            <label for="retypeprofessionalEmail" class="form-label">Re-type Professional Email</label>
+            <input 
+                type="email" 
+                class="form-control" 
+                id="retypeprofessionalEmail" 
+                formControlName="retypeurgprofessionalemail" 
+                placeholder="Re-type your professional email">
+        </div>
+
+        <!-- Personal Email -->
+        <div class="mb-3">
+            <label for="personalEmail" class="form-label">Personal Email</label>
+            <input 
+                type="email" 
+                class="form-control" 
+                id="personalEmail" 
+                formControlName="urgpersonalemail" 
+                placeholder="Enter your personal email">
+        </div>
+
+        <!-- Re-type Personal Email -->
+        <div class="mb-3">
+            <label for="retypepersonalEmail" class="form-label">Re-type Personal Email</label>
+            <input 
+                type="email" 
+                class="form-control" 
+                id="retypepersonalEmail" 
+                formControlName="retypeurgpersonalemail" 
+                placeholder="Re-type your personal email">
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="mb-3">
+            <label for="mobileNumber" class="form-label">Mobile Number</label>
+            <input 
+                type="tel" 
+                class="form-control" 
+                id="mobileNumber" 
+                formControlName="urgphone" 
+                placeholder="Enter your mobile number">
+        </div>
+
+        <!-- Secret Question 1 -->
+        <div class="mb-3">
+            <label for="secretQuestion1" class="form-label">Secret Question 1</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="secretQuestion1" 
+                formControlName="urgsecretq1" 
+                placeholder="Enter your first secret question">
+        </div>
+
+        <!-- Answer 1 -->
+        <div class="mb-3">
+            <label for="answer1" class="form-label">Answer 1</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="answer1" 
+                formControlName="urgsecreta1" 
+                placeholder="Enter the answer to your first secret question">
+        </div>
+
+        <!-- Secret Question 2 -->
+        <div class="mb-3">
+            <label for="secretQuestion2" class="form-label">Secret Question 2</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="secretQuestion2" 
+                formControlName="urgsecretq2" 
+                placeholder="Enter your second secret question">
+        </div>
+
+        <!-- Answer 2 -->
+        <div class="mb-3">
+            <label for="answer2" class="form-label">Answer 2</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="answer2" 
+                formControlName="urgsecreta2" 
+                placeholder="Enter the answer to your second secret question">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="FormData.invalid">Register</button>
+    </form>
+</div>
