@@ -13,16 +13,28 @@
                 placeholder="Enter your Username"
                 >
 
-            @if(FormData.get('urgUsername')?.invalid && FormData.get('urgUsername')?.touched){
-                <div class="text-danger">
-                    @if (FormData.get('urgUsername')?.errors?.['required']) {
-                        <small>Username is required.</small>
-                    }
-                    @if (FormData.get('urgUsername')?.errors?.['pattern']) {
-                        <small>Username must be 1-10 characters long and contain only letters and numbers.</small>
-                    }
-                </div>
-            }
+                @if(FormData.controls['urgUsername'].invalid && FormData.controls['urgUsername'].touched){
+                    <div class="text-danger">
+                        <small>
+                        @if (FormData.controls['urgUsername'].errors?.['required']) {
+                            Username is required.
+                        }
+                        @if (FormData.controls['urgUsername'].errors?.['maxlength']) {
+                            Username must be 10 characters long.
+                        }
+                        @if (FormData.controls['urgUsername'].errors?.['pattern']) {
+                            Username must be 1-10 characters long and contain only letters and numbers.
+                        }
+                        @if (FormData.controls['urgUsername'].errors?.['usernameTaken']) {
+                            Username is already exists.
+                        }
+                        @if (FormData.controls['urgUsername'].errors?.['serverError']) {
+                            Server error occurred. Please try again later. 
+                        }
+                    </small>
+                    </div>
+                }
+
         </div>
 
         <!-- Name -->

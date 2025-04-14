@@ -20,13 +20,17 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('sdAuth');
-    console.log('Authentication key removed from localStorage');
   }
 
   // Function to send registration data to the backend
   registerUser(data: wvsdUserRegistration): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(this.apiUrl+'/userregistration/modifyuserregistration', data, { headers });
+  }
+
+  checkUserNameExistInUserRegEmployeeAndSQL(data: wvsdUserRegistration):   Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(this.apiUrl+'/userregistration/checkUserNameExistInUserRegEmployeeAndSQL', data, { headers });
   }
   
 
