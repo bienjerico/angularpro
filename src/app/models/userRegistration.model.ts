@@ -1,6 +1,6 @@
 import { BaseModel } from "./base.model";
 
-export interface wvsdUserRegistration extends BaseModel {
+export interface userRegistrationModel extends BaseModel {
     urgid: number | null;
     urgName: string | null;
     urgUsername: string | null;

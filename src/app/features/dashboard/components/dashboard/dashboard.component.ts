@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LogoutComponent } from '../../../auth/components/logout/logout.component';
+import { LogoutComponent } from './../../../../core/auth/pages/logout/logout.component'; // Import the LogoutComponent
 
 @Component({
   selector: 'app-dashboard',

@@ -1,0 +1,171 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Registration</h2>
+    <form [formGroup]="FormData" (ngSubmit)="saveRegistration()">
+        <!-- Username -->
+        <div class="mb-3">
+            <label for="urgUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="urgUsername" name="urgUsername" formControlName="urgUsername"
+                placeholder="Enter your Username">
+            @if(FormData.controls['urgUsername'].invalid && FormData.controls['urgUsername'].touched){
+            <div class="text-danger">
+                <small>
+                    @if (FormData.controls['urgUsername'].errors?.['required']) {
+                    Username is required.
+                    }
+                    @if (FormData.controls['urgUsername'].errors?.['maxlength']) {
+                    Username must be 10 characters long.
+                    }
+                    @if (FormData.controls['urgUsername'].errors?.['pattern']) {
+                    Username must be 1-10 characters long and contain only letters and numbers.
+                    }
+                    @if (FormData.controls['urgUsername'].errors?.['usernameTaken']) {
+                    Username is already exists.
+                    }
+                    @if (FormData.controls['urgUsername'].errors?.['serverError']) {
+                    Server error occurred. Please try again later.
+                    }
+                </small>
+            </div>
+            }
+
+        </div>
+
+        <!-- Name -->
+        <div class="mb-3">
+            <label for="urgName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="urgName" formControlName="urgName"
+                placeholder="Enter your name">
+        </div>
+
+        <!-- Professional Email -->
+        <div class="mb-3">
+            <label for="urgprofessionalemail" class="form-label">Professional Email</label>
+            <input type="email" class="form-control" id="urgprofessionalemail" formControlName="urgprofessionalemail"
+                (input)="onEmailChange('retypeurgprofessionalemail')" placeholder="Enter your professional email">
+            @if(FormData.controls['urgprofessionalemail'].invalid && FormData.controls['urgprofessionalemail'].touched){
+            <div class="text-danger">
+                <small>
+                    @if (FormData.controls['urgprofessionalemail'].errors?.['required']) {
+                    Professional Email is required.
+                    }
+                    @if (FormData.controls['urgprofessionalemail'].errors?.['email']) {
+                    Invalid email format.
+                    }
+                    @if (FormData.controls['urgprofessionalemail'].errors?.['isMatchedEmail']) {
+                    Professional email do not match.
+                    }
+                </small>
+            </div>
+            }
+        </div>
+
+        <!-- Re-type Professional Email -->
+        <div class="mb-3">
+            <label for="retypeurgprofessionalemail" class="form-label">Re-type Professional Email</label>
+            <input type="email" class="form-control" id="retypeurgprofessionalemail"
+                formControlName="retypeurgprofessionalemail" (input)="onEmailChange('urgprofessionalemail')"
+                placeholder="Re-type your professional email">
+            @if(FormData.controls['retypeurgprofessionalemail'].invalid &&
+            FormData.controls['retypeurgprofessionalemail'].touched){
+            <div class="text-danger">
+                <small>
+                    @if (FormData.controls['retypeurgprofessionalemail'].errors?.['required']) {
+                    Professional Email is required.
+                    }
+                    @if (FormData.controls['retypeurgprofessionalemail'].errors?.['email']) {
+                    Invalid email format.
+                    }
+                    @if (FormData.controls['retypeurgprofessionalemail'].errors?.['isMatchedEmail']) {
+                    Re-Typed Professional email do not match.
+                    }
+                </small>
+            </div>
+            }
+        </div>
+
+        <!-- Personal Email -->
+        <div class="mb-3">
+            <label for="urgpersonalemail" class="form-label">Personal Email</label>
+            <input type="email" class="form-control" id="urgpersonalemail" formControlName="urgpersonalemail"
+                (input)="onEmailChange('retypeurgpersonalemail')" placeholder="Enter your personal email">
+            @if(FormData.controls['urgpersonalemail'].invalid &&
+            FormData.controls['urgpersonalemail'].touched){
+            <div class="text-danger">
+                <small>
+                    @if (FormData.controls['urgpersonalemail'].errors?.['required']) {
+                    Personal Email is required.
+                    }
+                    @if (FormData.controls['urgpersonalemail'].errors?.['email']) {
+                    Invalid email format.
+                    }
+                    @if (FormData.controls['urgpersonalemail'].errors?.['isMatchedEmail']) {
+                    Personal email do not match.
+                    }
+                </small>
+            </div>
+            }
+        </div>
+
+        <!-- Re-type Personal Email -->
+        <div class="mb-3">
+            <label for="retypeurgpersonalemail" class="form-label">Re-type Personal Email</label>
+            <input type="email" class="form-control" id="retypeurgpersonalemail"
+                formControlName="retypeurgpersonalemail" (input)="onEmailChange('urgpersonalemail')"
+                placeholder="Re-type your personal email">
+            @if(FormData.controls['retypeurgpersonalemail'].invalid &&
+            FormData.controls['retypeurgpersonalemail'].touched){
+            <div class="text-danger">
+                <small>
+                    @if (FormData.controls['retypeurgpersonalemail'].errors?.['required']) {
+                    Re-type Personal Email is required.
+                    }
+                    @if (FormData.controls['retypeurgpersonalemail'].errors?.['email']) {
+                    Invalid email format.
+                    }
+                    @if (FormData.controls['retypeurgpersonalemail'].errors?.['isMatchedEmail']) {
+                    Re-typed Personal email do not match.
+                    }
+                </small>
+            </div>
+            }
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="mb-3">
+            <label for="urgphone" class="form-label">Mobile Number</label>
+            <input type="tel" class="form-control" id="urgphone" formControlName="urgphone"
+                placeholder="Enter your mobile number">
+        </div>
+
+        <!-- Secret Question 1 -->
+        <div class="mb-3">
+            <label for="urgsecretq1" class="form-label">Secret Question 1</label>
+            <input type="text" class="form-control" id="urgsecretq1" formControlName="urgsecretq1"
+                placeholder="Enter your first secret question">
+        </div>
+
+        <!-- Answer 1 -->
+        <div class="mb-3">
+            <label for="urgsecreta1" class="form-label">Answer 1</label>
+            <input type="text" class="form-control" id="urgsecreta1" formControlName="urgsecreta1"
+                placeholder="Enter the answer to your first secret question">
+        </div>
+
+        <!-- Secret Question 2 -->
+        <div class="mb-3">
+            <label for="urgsecretq2" class="form-label">Secret Question 2</label>
+            <input type="text" class="form-control" id="urgsecretq2" formControlName="urgsecretq2"
+                placeholder="Enter your second secret question">
+        </div>
+
+        <!-- Answer 2 -->
+        <div class="mb-3">
+            <label for="urgsecreta2" class="form-label">Answer 2</label>
+            <input type="text" class="form-control" id="urgsecreta2" formControlName="urgsecreta2"
+                placeholder="Enter the answer to your second secret question">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="FormData.invalid">Register</button>
+    </form>
+</div>

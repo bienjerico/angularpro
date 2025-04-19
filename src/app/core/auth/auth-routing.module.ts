@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { redirectIfAuthenticatedGuard } from '../../guards/redirect-if-authenticated.guard';
+import { redirectIfAuthenticatedGuard } from './auth.guard'; // Import the redirect guard
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './pages/login/login.component'; // Import the login component
+import { RegistrationComponent } from './pages/registration/registration.component'; // Import the registration component
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [redirectIfAuthenticatedGuard] }, // Login page
