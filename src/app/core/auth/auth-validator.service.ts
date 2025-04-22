@@ -39,92 +39,52 @@ export class AuthValidatorService {
     };
   }
 
-  // Function to check if the professional email matches the retyped professional email
-  validateEmail(orginalemail: string, retypeemail: string): any {
-    // Check if the original and retyped emails match
-     if (!orginalemail || !retypeemail) {
-      return of(null);
-    }
-    // Check if the original and retyped emails match
-    return of(orginalemail !== retypeemail ? { isMatchedEmail: true } : null);
-  }
-
-  // Function to check if the oringal professional email matches the retyped professional email
-  checkProfessionalEmailIsMatch(): AsyncValidatorFn{
+  // Function to check if the original email matches the retyped email
+  checkEmailIsMatch(getEmailValues: () => {originalEmail: string, retypeEmail: string}): AsyncValidatorFn{
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const urgprofessionalemail: string = control.value;
-
-      if(!urgprofessionalemail) {
-        return of(null); // If the email is empty, return null immediately (no error) 
+      const {originalEmail, retypeEmail} = getEmailValues(); // Get the expected email value
+      if (!control.value) {
+        return of(null);
       }
-      
-      // Avoid direct modification of the form group
-      const FormData = {
-        ...control.parent?.value,
-        urgprofessionalemail: urgprofessionalemail,
-      };
-
       // Check if the professional emails match
-      return this.validateEmail(FormData.urgprofessionalemail, FormData.retypeurgprofessionalemail);
-    };
-  }
-
-  // Function to check if the retyped professional email matches the original professional email
-  checkReTypeProfessionalEmailIsMatch(): AsyncValidatorFn{
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const retypeurgprofessionalemail: string = control.value;
-
-      if(!retypeurgprofessionalemail) {
-        return of(null); // If the email is empty, return null immediately (no error) 
+      if (!originalEmail || !retypeEmail) {
+        return of(null);
       }
-      
-      // Avoid direct modification of the form group
-      const FormData = {
-        ...control.parent?.value,
-        retypeurgprofessionalemail: retypeurgprofessionalemail,
-      };
-      // Check if the professional emails match
-      return this.validateEmail(FormData.urgprofessionalemail, FormData.retypeurgprofessionalemail);
+      // Check if the original and retyped emails match
+      return of(originalEmail !== retypeEmail ? { isMatchedEmail: true } : null);
     };
   }
 
-  // Function to check if the personal email matches the retyped personal email
-  checkPersonalEmailIsMatch(): AsyncValidatorFn{
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const urgpersonalemail: string = control.value;
+  
+  // // Function to check if the professional email matches the retyped professional email
+  // validateEmail(orginalemail: string, retypeemail: string): any {
+  //   // Check if the original and retyped emails match
+  //    if (!orginalemail || !retypeemail) {
+  //     return of(null);
+  //   }
+  //   // Check if the original and retyped emails match
+  //   return of(orginalemail !== retypeemail ? { isMatchedEmail: true } : null);
+  // }
 
-      if(!urgpersonalemail) {
-        return of(null); // If the email is empty, return null immediately (no error) 
-      }
+
+  // // Function to check if the retyped professional email matches the original professional email
+  // checkReTypeProfessionalEmailIsMatch(): AsyncValidatorFn{
+  //   return (control: AbstractControl): Observable<ValidationErrors | null> => {
+  //     const retypeurgprofessionalemail: string = control.value;
+
+  //     if(!retypeurgprofessionalemail) {
+  //       return of(null); // If the email is empty, return null immediately (no error) 
+  //     }
       
-      // Avoid direct modification of the form group
-      const FormData = {
-        ...control.parent?.value,
-        urgpersonalemail: urgpersonalemail,
-      };
-      /// Check if the personal emails match
-      return this.validateEmail(FormData.urgpersonalemail, FormData.retypeurgpersonalemail);
-    };
-  }
-
-  // Function to check if the retyped personal email matches the original personal email
-  checkReTypePersonalEmailIsMatch(): AsyncValidatorFn{
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const retypeurgpersonalemail: string = control.value;
-
-      if(!retypeurgpersonalemail) {
-        return of(null); // If the email is empty, return null immediately (no error) 
-      }
-      
-      // Avoid direct modification of the form group
-      const FormData = {
-        ...control.parent?.value,
-        retypeurgpersonalemail: retypeurgpersonalemail,
-      };
-      /// Check if the personal emails match
-      return this.validateEmail(FormData.urgpersonalemail, FormData.retypeurgpersonalemail);
-    };
-  }
+  //     // Avoid direct modification of the form group
+  //     const FormData = {
+  //       ...control.parent?.value,
+  //       retypeurgprofessionalemail: retypeurgprofessionalemail,
+  //     };
+  //     // Check if the professional emails match
+  //     return this.validateEmail(FormData.urgprofessionalemail, FormData.retypeurgprofessionalemail);
+  //   };
+  // }
 
 
 }

@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule, FormBuilder,FormGroup, Validators, ReactiveFormsModule, } from '@angular/forms';
 import { AuthService } from './../../auth.service'
-import { userRegistrationModel  } from '../../../../models/userRegistration.model';
+import { userRegistrationModel  } from '../../../../shared/models/userRegistration.model';
 import { AuthValidatorService } from '../../auth-validator.service';
+import { PhonenumberValidatorService } from '../../../../shared/services/validators/phonenumber-validator.service';
+import { PhoneNumberFormatterDirective } from '../../../../shared/directives/phone-number-formatter.directive';
 
 @Component({
   selector: 'app-registration',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule,PhoneNumberFormatterDirective],
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
@@ -16,6 +18,7 @@ export class RegistrationComponent {
 
   constructor(private authService: AuthService, 
     private authValidatorService : AuthValidatorService,
+    private phonenumberValidatorService: PhonenumberValidatorService,
     private fb: FormBuilder) {
       this.FormData = this.fb.group({
         urgUsername: [
@@ -27,24 +30,47 @@ export class RegistrationComponent {
         urgprofessionalemail: [
           null, 
           [Validators.required,Validators.email],
-          [this.authValidatorService.checkProfessionalEmailIsMatch()] // Custom validator to check professional email
+          [this.authValidatorService.checkEmailIsMatch(
+            () => ({
+                originalEmail: this.FormData.controls['urgprofessionalemail']?.value, 
+                retypeEmail:this.FormData.controls['retypeurgprofessionalemail']?.value
+              }))
+          ] 
         ], // FormGroup for professional email
         retypeurgprofessionalemail:[
           null, 
           [Validators.required,Validators.email],
-          [this.authValidatorService.checkReTypeProfessionalEmailIsMatch()] // Custom validator to check if professional email matches
+          [this.authValidatorService.checkEmailIsMatch(
+            () => ({
+                originalEmail: this.FormData.controls['urgprofessionalemail']?.value, 
+                retypeEmail:this.FormData.controls['retypeurgprofessionalemail']?.value
+              }))
+          ] 
         ], // FormGroup for retyped professional email
         urgpersonalemail: [
           null, 
           [Validators.required,Validators.email],
-          [this.authValidatorService.checkPersonalEmailIsMatch()]
+          [this.authValidatorService.checkEmailIsMatch(
+            () => ({
+                originalEmail: this.FormData.controls['urgpersonalemail']?.value, 
+                retypeEmail:this.FormData.controls['retypeurgpersonalemail']?.value
+              }))
+          ] 
         ], // FormGroup for personal email
         retypeurgpersonalemail: [
           null, 
           [Validators.required,Validators.email],
-          [this.authValidatorService.checkReTypePersonalEmailIsMatch()] // Custom validator to check if personal email matches
+          [this.authValidatorService.checkEmailIsMatch(
+            () => ({
+                originalEmail: this.FormData.controls['urgpersonalemail']?.value, 
+                retypeEmail:this.FormData.controls['retypeurgpersonalemail']?.value
+              }))
+          ]
         ], // FormGroup for retyped personal email
-        urgphone: [null, [Validators.required]], // FormGroup for phone number
+        urgphone: [
+          null, 
+          [Validators.required,this.phonenumberValidatorService.checkPhoneNumberIsValid()], // Custom validator to check phone number validity
+        ], // FormGroup for phone number
         urgsecretq1: [null, [Validators.required]], // FormGroup for secret question 1
         urgsecreta1: [null, [Validators.required]], // FormGroup for secret answer 1
         urgsecretq2: [null, [Validators.required]], // FormGroup for secret question 2
@@ -57,10 +83,11 @@ export class RegistrationComponent {
     // console.log(this.FormData); // Log the username value
   }
 
+  // Function to clear the error when the email is changed
   onEmailChange(controlname: string) {
-    const email = this.FormData.controls[controlname]; // Get the retype professional email control
+    const email = this.FormData.controls[controlname]; // Get the retype email control
     if(email.errors?.['isMatchedEmail']){
-      email.setErrors(null); // Clear the error if the professional email is valid
+      email.setErrors(null); // Clear the error if the email is valid
       email.updateValueAndValidity();
     }
   }

@@ -132,11 +132,23 @@
 
         <!-- Mobile Number -->
         <div class="mb-3">
-            <label for="urgphone" class="form-label">Mobile Number</label>
+            <label for="urgphone" class="form-label">Phone Number</label>
             <input type="tel" class="form-control" id="urgphone" formControlName="urgphone"
-                placeholder="Enter your mobile number">
+            appPhoneNumberFormatter placeholder="Enter your mobile number">
+            @if(FormData.controls['urgphone'].invalid &&
+                FormData.controls['urgphone'].touched){
+                <div class="text-danger">
+                    <small>
+                        @if (FormData.controls['urgphone'].errors?.['required']) {
+                        Phone Number is required.
+                        }
+                        @if (   FormData.controls['urgphone'].errors?.['invalidPhoneNumber']) {
+                        Invalid Phone Number format.
+                        }
+                    </small>
+                </div>
+                }
         </div>
-
         <!-- Secret Question 1 -->
         <div class="mb-3">
             <label for="urgsecretq1" class="form-label">Secret Question 1</label>
