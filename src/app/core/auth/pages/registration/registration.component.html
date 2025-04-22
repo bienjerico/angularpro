@@ -152,8 +152,11 @@
         <!-- Secret Question 1 -->
         <div class="mb-3">
             <label for="urgsecretq1" class="form-label">Secret Question 1</label>
-            <input type="text" class="form-control" id="urgsecretq1" formControlName="urgsecretq1"
-                placeholder="Enter your first secret question">
+            <select class="form-select mt-2" formControlName="urgsecretq1" id="urgsecretq1" placeholder="Enter your first secret question">
+                @for (item of securityQuestions; track item.id) {
+                <option value="{{item.question}}">{{item.question}}</option>
+                } 
+            </select>
         </div>
 
         <!-- Answer 1 -->
@@ -166,8 +169,11 @@
         <!-- Secret Question 2 -->
         <div class="mb-3">
             <label for="urgsecretq2" class="form-label">Secret Question 2</label>
-            <input type="text" class="form-control" id="urgsecretq2" formControlName="urgsecretq2"
-                placeholder="Enter your second secret question">
+            <select class="form-select mt-2" formControlName="urgsecretq2" id="urgsecretq2" placeholder="Enter your second secret question">
+                @for (item of securityQuestions; track item.id) {
+                <option value="{{item.question}}">{{item.question}}</option>
+                } 
+            </select>
         </div>
 
         <!-- Answer 2 -->

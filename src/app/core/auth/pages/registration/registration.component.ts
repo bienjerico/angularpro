@@ -1,20 +1,24 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule, FormBuilder,FormGroup, Validators, ReactiveFormsModule, } from '@angular/forms';
 import { AuthService } from './../../auth.service'
 import { userRegistrationModel  } from '../../../../shared/models/userRegistration.model';
 import { AuthValidatorService } from '../../auth-validator.service';
 import { PhonenumberValidatorService } from '../../../../shared/services/validators/phonenumber-validator.service';
 import { PhoneNumberFormatterDirective } from '../../../../shared/directives/phone-number-formatter.directive';
+import { SECURITY_QUESTIONS } from '../../../../shared/data/security-question.data';
+import { SecurityQuestionModel } from '../../../../shared/models/security-question.model';
 
 @Component({
   selector: 'app-registration',
-  imports: [FormsModule, ReactiveFormsModule,PhoneNumberFormatterDirective],
+  imports: [FormsModule, ReactiveFormsModule,PhoneNumberFormatterDirective,CommonModule],
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
 
   FormData: FormGroup; // Correctly define FormData as a FormGroup
+  securityQuestions: SecurityQuestionModel[] = SECURITY_QUESTIONS; // Array to hold security questions
 
   constructor(private authService: AuthService, 
     private authValidatorService : AuthValidatorService,
