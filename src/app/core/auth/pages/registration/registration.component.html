@@ -153,7 +153,7 @@
         <div class="mb-3">
             <label for="urgsecretq1" class="form-label">Secret Question 1</label>
             <select class="form-select mt-2" formControlName="urgsecretq1" id="urgsecretq1" placeholder="Enter your first secret question">
-                @for (item of securityQuestions; track item.id) {
+                @for (item of securityQuestionData; track item.id) {
                 <option value="{{item.question}}">{{item.question}}</option>
                 } 
             </select>
@@ -170,7 +170,7 @@
         <div class="mb-3">
             <label for="urgsecretq2" class="form-label">Secret Question 2</label>
             <select class="form-select mt-2" formControlName="urgsecretq2" id="urgsecretq2" placeholder="Enter your second secret question">
-                @for (item of securityQuestions; track item.id) {
+                @for (item of securityQuestionData; track item.id) {
                 <option value="{{item.question}}">{{item.question}}</option>
                 } 
             </select>

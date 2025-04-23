@@ -6,7 +6,7 @@ import { userRegistrationModel  } from '../../../../shared/models/userRegistrati
 import { AuthValidatorService } from '../../auth-validator.service';
 import { PhonenumberValidatorService } from '../../../../shared/services/validators/phonenumber-validator.service';
 import { PhoneNumberFormatterDirective } from '../../../../shared/directives/phone-number-formatter.directive';
-import { SECURITY_QUESTIONS } from '../../../../shared/data/security-question.data';
+import { SecurityQuestionData } from '../../../../shared/data/security-question.data';
 import { SecurityQuestionModel } from '../../../../shared/models/security-question.model';
 
 @Component({
@@ -18,7 +18,7 @@ import { SecurityQuestionModel } from '../../../../shared/models/security-questi
 export class RegistrationComponent {
 
   FormData: FormGroup; // Correctly define FormData as a FormGroup
-  securityQuestions: SecurityQuestionModel[] = SECURITY_QUESTIONS; // Array to hold security questions
+  securityQuestionData: SecurityQuestionModel[] = SecurityQuestionData; // Array to hold security questions
 
   constructor(private authService: AuthService, 
     private authValidatorService : AuthValidatorService,

@@ -1,6 +1,6 @@
 import { SecurityQuestionModel } from '../models/security-question.model'
 
-export const SECURITY_QUESTIONS: SecurityQuestionModel[] = [
+export const SecurityQuestionData: SecurityQuestionModel[] = [
   { id: 1, question: 'What is your mother\'s maiden name?' },
   { id: 2, question: 'What was the name of your first pet?' },
   { id: 3, question: 'What is the name of the street where you grew up?' },
