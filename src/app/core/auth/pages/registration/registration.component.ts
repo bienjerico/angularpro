@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, FormBuilder,FormGroup, Validators, ReactiveFormsModule, } from '@angular/forms';
 import { AuthService } from './../../auth.service'
-import { userRegistrationModel  } from '../../../../shared/models/userRegistration.model';
+import { userRegistrationFormGroup, userRegistrationModel  } from '../../../../shared/models/userRegistration.model';
 import { AuthValidatorService } from '../../auth-validator.service';
 import { PhonenumberValidatorService } from '../../../../shared/services/validators/phonenumber-validator.service';
 import { PhoneNumberFormatterDirective } from '../../../../shared/directives/phone-number-formatter.directive';
@@ -79,7 +79,7 @@ export class RegistrationComponent {
         urgsecreta1: [null, [Validators.required]], // FormGroup for secret answer 1
         urgsecretq2: [null, [Validators.required]], // FormGroup for secret question 2
         urgsecreta2: [null, [Validators.required]] // FormGroup for secret answer 2
-      });
+      }) as userRegistrationFormGroup; // Cast to userRegistrationModel
   }
 
   onUsernameChange(event: any) {
@@ -100,9 +100,9 @@ export class RegistrationComponent {
   saveRegistration() {
     if (this.FormData.valid) {
       console.log("this.FormData",this.FormData);
-      const userRegistrationModel: userRegistrationModel = this.FormData.value; // Get the form data
+   //   const userRegistrationModel: userRegistrationModel = this.FormData.value; // Get the form data
 
-      console.log('FormData:', userRegistrationModel); // Log the FormData object
+      console.log('FormData:', this.FormData); // Log the FormData object
       // this.authService.registerUser(this.FormData).subscribe({
       //   next: (response: any) => {
       //     console.log('Registration successful:', response);
